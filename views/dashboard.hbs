@@ -1,0 +1,40 @@
+<h3>welcome {{name}}</h3>
+
+<p>here is your stories</p>
+
+{{#if stories}}
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each stories}}
+        <tr>
+          <td><a href="/stories/{{_id}}">Title</a></td>
+          <td>{{formatDate createdAt "MMMM D yy, hh:mm:ss a"}}</td>
+          <td><span class="dash-status">{{status}}</span></td>
+          <td>
+            <a href="/stories/edit/{{_id}}" class="btn btn-float"><i
+                class="fas fa-edit"
+              ></i></a>
+
+            <form action="/stories/{{_id}}" method="post">
+              <input type="hidden" name="_method" value="DELETE" />
+              <button type="submit" class="btn red"><i
+                  class="fas fa-trash"
+                ></i></button>
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>you are not created any stories yet.</p>
+{{/if}}
